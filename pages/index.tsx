@@ -1,6 +1,6 @@
 import { Carousel, Layout } from "antd";
 import Image from "next/image";
-import service from '@/service/axios'
+import service from "@/service/axios";
 import { IBanner, IResponse } from "@/types";
 // import { Inter } from "next/font/google";
 
@@ -9,9 +9,14 @@ import { IBanner, IResponse } from "@/types";
 const { Header, Content, Footer } = Layout;
 
 export const getServerSideProps = async () => {
-  const { data: { banners } } = await service.get<IResponse<'banners', IBanner>>('/banner', { params: { type: 2 } });
-  return { props: { banners } }
-}
+  const {
+    data: { banners },
+  } = await service.get<IResponse<"banners", IBanner>>("/banner", {
+    params: { type: 0 },
+  });
+  console.log(banners, "s");
+  return { props: { banners } };
+};
 
 export default function Home({ banners }: { banners: IBanner[] }) {
   return (
@@ -34,13 +39,30 @@ export default function Home({ banners }: { banners: IBanner[] }) {
           </div>
         </Header>
         <Content>
-          <Carousel arrows infinite>
-            {banners.map(item =>
-              <img src={item.pic} alt={item.typeTitle} width={980} height={300}></img>
-            )}
-          </Carousel>
+          <div className="flex w-full h-full justify-center align-center">
+            <div className="flex">
+              <div className="w-[730px] h-[270px]">
+                <Carousel arrows infinite>
+                  {banners.map((item) => (
+                    <Image
+                      src={item.imageUrl}
+                      alt={item.typeTitle}
+                      width={730}
+                      height={284}
+                      key={item.targetId}
+                    />
+                  ))}
+                </Carousel>
+              </div>
+              <div className="w-[250px] h-[270px]">
+                <div>未解锁区域，敬请期待</div>
+                <div>未解锁区域，敬请期待</div>
+                <div>未解锁区域，敬请期待</div>
+              </div>
+            </div>
+          </div>
         </Content>
-        <Footer></Footer>
+        <Footer>111</Footer>
       </Layout>
     </main>
   );

@@ -12,7 +12,17 @@ const nextConfig = {
     "rc-tooltip",
     "rc-tree",
     "rc-table"
-  ]
+  ],
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'p1.music.126.net',
+        port: '',
+        pathname: '/**'
+      }
+    ]
+  }
 };
 
 export default nextConfig;
