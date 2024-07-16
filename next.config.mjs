@@ -20,6 +20,24 @@ const nextConfig = {
         hostname: 'p1.music.126.net',
         port: '',
         pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'p1.music.126.net',
+        port: '',
+        pathname: '/**'
+      },
+      {
+        protocol: 'http',
+        hostname: 'p2.music.126.net',
+        port: '',
+        pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'p2.music.126.net',
+        port: '',
+        pathname: '/**'
       }
     ]
   }
