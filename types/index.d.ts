@@ -33,6 +33,40 @@ export interface IRadioStaion {
     rcmdtext: string
 }
 
+export interface IPlaylistDetail {
+    coverImgUrl: string,
+    description: string,
+    createTime: number,
+    id: number,
+    name: string,
+    tags: string[],
+    trackCount: number
+}
+
+export interface IPlaylistResponse {
+    playlist: IPlaylistDetail
+}
+
+export interface ISongType {
+    name: string,
+    dt: number,
+    id: number,
+    al: IAlbumType,
+    ar: IArtistType[]
+}
+
+export interface IAlbumType {
+    id: number,
+    name: string,
+    pic: number,
+    picUrl: string,
+}
+
+export interface IArtistType {
+    name: string,
+    id: number,
+}
+
 export interface IRecommendationProps<T> {
     title: string,
     categoryList: string[],
@@ -40,4 +74,8 @@ export interface IRecommendationProps<T> {
     renderProps: (recommendationData: T) => ReactNode
 }
 
-export type IResponse<T extends Record<string, any>> = {code: number} & T
+export interface IBaseLayout {
+    renderPropsChildren: () => ReactNode
+}
+
+export type IResponse<T extends Record<string, any>> = { code: number } & T
