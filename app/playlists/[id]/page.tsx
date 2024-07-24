@@ -1,4 +1,4 @@
-'use server'
+import PlaylistCommentContainer from "@/components/PlaylistComment";
 import service from "@/service/axios";
 import {
   IArtistType,
@@ -12,50 +12,12 @@ import Image from "next/image";
 
 // https://blog.csdn.net/weixin_38441229/article/details/132247115
 
-const columns: TableColumnsType = [
-  {
-    title: "",
-    dataIndex: "id",
-    key: "id",
-  },
-  {
-    title: "歌曲名称",
-    dataIndex: "name",
-    key: "name",
-  },
-  {
-    title: "时长",
-    dataIndex: "dt",
-    key: "dt",
-  },
-  {
-    title: "歌手",
-    render: async (record) => {
-      'use server'
-      const tempStrArr: string[] = [];
-      record.ar.forEach((artist: IArtistType) => {
-        tempStrArr.push(artist.name);
-      });
-
-      return tempStrArr.join(",");
-    },
-  },
-  {
-    title: "专辑",
-    render: async (record) => {
-      'use server'
-      return record.al.name;
-    },
-  },
-];
-
 export const getInitData = async (
   id: number
 ): Promise<{
   playlist: IPlaylistDetail;
   songs: ISongType[];
 }> => {
-  'use server'
   const {
     data: { playlist },
   } = await service.get<IResponse<IPlaylistResponse>>(`/playlist/detail`, {
@@ -74,6 +36,7 @@ export const getInitData = async (
 
 export default async function Page({ params }: { params: { id: number } }) {
   const { playlist, songs } = await getInitData(params.id);
+
   return (
     <div className="w-full flex justify-center ">
       <div className="w-[980px] flex flex-col pl-[40px] pr-[40px] pt-[40px] pb-[40px] border-[1px] border-solid border-[#d3d3d3] bg-white">
@@ -112,19 +75,26 @@ export default async function Page({ params }: { params: { id: number } }) {
         <div className="flex w-full mt-[20px]">
           <div className="flex justify-between w-full border-b-[2px] border-solid border-[#C10D0C]">
             <span>
-              <span className="text-[18px] ">歌曲列表</span>
+              <span className="text-[18px]">歌曲列表</span>
               <span className="text-[12px] ml-[20px]">
                 {playlist.trackCount}首歌
               </span>
             </span>
           </div>
         </div>
-        <Table
-          columns={columns}
-          dataSource={songs}
-          pagination={false}
-          scroll={{ y: 600 }}
-        ></Table>
+        <div className="flex h-[40px]">
+          <div className="flex flex-1">
+            <span>歌曲名字</span>
+          </div>
+        </div>
+        <div className="h-[500px] overflow-y-auto">
+          {songs.map((item) => (
+            <div className="flex h-[30px]" key={item.name}>
+              <span>{item.name}</span>
+            </div>
+          ))}
+        </div>
+        <PlaylistCommentContainer id={playlist.id}></PlaylistCommentContainer>
       </div>
     </div>
   );

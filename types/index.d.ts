@@ -78,4 +78,23 @@ export interface IBaseLayout {
     renderPropsChildren: () => ReactNode
 }
 
+export interface IUserType {
+    avatarUrl: string,
+    nickname: string,
+    userId: number,
+}
+
+export interface ICommentType {
+    content: string,
+    user: IUserType,
+    time: number,
+    commentId: number
+}
+
+export interface ICommentResposeType {
+    total: number,
+    more: boolean,
+    comments: ICommentType[]
+}
+
 export type IResponse<T extends Record<string, any>> = { code: number } & T

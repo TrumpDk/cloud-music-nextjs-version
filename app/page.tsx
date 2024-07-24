@@ -1,4 +1,3 @@
-'use server'
 import { Carousel } from "antd";
 import Image from "next/image";
 import service from "@/service/axios";

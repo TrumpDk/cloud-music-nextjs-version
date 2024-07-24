@@ -38,6 +38,18 @@ const nextConfig = {
         hostname: 'p2.music.126.net',
         port: '',
         pathname: '/**'
+      },
+      {
+        protocol: 'http',
+        hostname: 'p3.music.126.net',
+        port: '',
+        pathname: '/**'
+      },
+      {
+        protocol: 'http',
+        hostname: 'p4.music.126.net',
+        port: '',
+        pathname: '/**'
       }
     ]
   }
