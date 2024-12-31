@@ -3,6 +3,7 @@ import "./globals.css";
 import React from "react";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { Content, Footer, Header } from "antd/es/layout/layout";
+import Providers from "@/app/providers";
 
 export default function RootLayout({
   children,
@@ -10,6 +11,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
+
     <html lang="en">
       <body>
         <AntdRegistry>
@@ -32,7 +34,9 @@ export default function RootLayout({
                 </div>
               </Header>
               <Content className="h-[500px] overflow-y-auto">
-                {children}
+                <Providers>
+                  {children}
+                </Providers>
               </Content>
               <Footer>111</Footer>
             </Layout>

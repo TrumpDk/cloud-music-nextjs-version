@@ -7,7 +7,6 @@ import {
   IResponse,
   ISongType,
 } from "@/types";
-import { Table, TableColumnsType } from "antd";
 import Image from "next/image";
 
 // https://blog.csdn.net/weixin_38441229/article/details/132247115
